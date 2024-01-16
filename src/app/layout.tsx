@@ -1,37 +1,49 @@
-import type { Metadata } from 'next'
-
 import '@/styles/globals.css'
-import { ThemeProvider } from '@/components/providers/theme-providers'
+import { ClerkProvider } from '@clerk/nextjs'
+import type { Metadata, Viewport } from 'next'
+import { ReactNode } from 'react'
+
+import { ThemeProvider } from '@/components/providers/theme-provider'
+import { siteConfig } from '@/config/site'
 import { fontSans } from '@/lib/fonts'
 import { cn } from '@/lib/utils'
 
-export const metadata: Metadata = {
-  title: 'Lista de tarefas',
-  description: 'Lista de tarefas',
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: 'white' },
+    { media: '(prefers-color-scheme: dark)', color: 'black' },
+  ],
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export const metadata: Metadata = {
+  title: {
+    default: siteConfig.name,
+    template: `%s - ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon-16x16.png',
+    apple: '/apple-touch-icon.png',
+  },
+}
+
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="pt-BR">
-      <body
-        className={cn(
-          'bg-background min-h-screen font-sans antialiased',
-          fontSans.variable,
-        )}
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
+    <ClerkProvider>
+      <html lang="pt-BR" suppressHydrationWarning>
+        <head />
+        <body
+          className={cn(
+            'scrollbar-thin scrollbar-track-background scrollbar-thumb-foreground min-h-screen bg-background font-sans antialiased',
+            fontSans.variable,
+          )}
         >
-          {children}
-        </ThemeProvider>
-      </body>
-    </html>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            {children}
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   )
 }
