@@ -15,11 +15,11 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
       <AspectRatio ratio={16 / 9}>
         <Image
           src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt="A skateboarder doing a high drop"
+          alt="Um Notebook com uma xícara de café ao lado"
           fill
           className="absolute inset-0 object-cover"
           priority
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background to-background/60 md:to-background/40" />
         <Link

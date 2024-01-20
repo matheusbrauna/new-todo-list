@@ -1,4 +1,4 @@
-import { currentUser } from '@clerk/nextjs'
+import { auth } from '@clerk/nextjs'
 import { type Metadata } from 'next'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
@@ -16,13 +16,16 @@ import {
 } from '@/components/ui/card'
 
 export const metadata: Metadata = {
-  title: 'Sign In',
-  description: 'Sign in to your account',
+  title: 'Login',
+  description: 'Faça o login na sua conta',
 }
 
 export default async function SignInPage() {
-  const user = await currentUser()
-  if (user) redirect('/')
+  const { userId } = auth()
+
+  if (userId) {
+    redirect('/')
+  }
 
   return (
     <Shell className="max-w-lg">

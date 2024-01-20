@@ -11,8 +11,8 @@ import {
 } from '@/components/ui/card'
 
 export const metadata: Metadata = {
-  title: 'Reset Password',
-  description: 'Enter your email to reset your password',
+  title: 'Recuperar senha',
+  description: 'Insira o seu email para recuperar sua senha.',
 }
 
 export default function ResetPasswordPage() {

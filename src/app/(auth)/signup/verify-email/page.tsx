@@ -11,8 +11,8 @@ import {
 } from '@/components/ui/card'
 
 export const metadata: Metadata = {
-  title: 'Verify Email',
-  description: 'Verify your email address to continue with your sign up',
+  title: 'Verificar email',
+  description: 'Verifique seu endereço de email para continuar.',
 }
 
 export default function VerifyEmailPage() {

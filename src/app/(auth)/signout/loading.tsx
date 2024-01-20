@@ -10,9 +10,9 @@ export default function SignOutLoading() {
   return (
     <Shell className="max-w-xs">
       <PageHeader className="text-center">
-        <PageHeaderHeading size="sm">Sair</PageHeaderHeading>
+        <PageHeaderHeading size="sm">Logout</PageHeaderHeading>
         <PageHeaderDescription size="sm">
-          Você tem certeza de que deseja sair?
+          Tem certeza de que deseja sair?
         </PageHeaderDescription>
       </PageHeader>
       <div className="flex w-full items-center space-x-2">

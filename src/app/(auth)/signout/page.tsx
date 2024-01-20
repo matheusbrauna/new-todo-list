@@ -9,8 +9,8 @@ import {
 import { Shell } from '@/components/shells/shell'
 
 export const metadata: Metadata = {
-  title: 'Sign out',
-  description: 'Sign out of your account',
+  title: 'Sair da conta',
+  description: 'Saia da sua conta',
 }
 
 export default function SignOutPage() {

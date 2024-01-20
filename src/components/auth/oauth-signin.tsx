@@ -33,7 +33,7 @@ export function OAuthSignIn() {
     } catch (error) {
       setIsLoading(null)
 
-      const unknownError = 'Something went wrong, please try again.'
+      const unknownError = 'Algo deu errado. Por favor, tente novamente.'
 
       isClerkAPIResponseError(error)
         ? toast.error(error.errors[0]?.longMessage ?? unknownError)
