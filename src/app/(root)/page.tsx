@@ -1,22 +1,10 @@
-import { MagnifyingGlassIcon } from '@radix-ui/react-icons'
+import { Plus } from 'lucide-react'
 import { Metadata } from 'next'
-import Link from 'next/link'
 
-import { Icons } from '@/components/icons'
 import { Shell } from '@/components/shells/shell'
-import { Button, buttonVariants } from '@/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
-import { Checkbox } from '@/components/ui/checkbox'
-import { Input } from '@/components/ui/input'
-import { ScrollArea } from '@/components/ui/scroll-area'
+import { TodosTable } from '@/components/todos/client'
+import { Button } from '@/components/ui/button'
 import { env } from '@/env'
-import { cn } from '@/lib/utils'
 
 export const metadata: Metadata = {
   metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
@@ -26,33 +14,18 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <Shell className="main-height max-w-3xl">
-      <section className="mx-auto flex w-full max-w-5xl flex-col items-center justify-center gap-4 text-center">
-        <div className="flex w-full space-x-2">
-          <Input type="text" placeholder="Buscar tarefa..." />
-          <Button size="icon">
-            <MagnifyingGlassIcon className="h-4 w-4" />
-          </Button>
+    <Shell className="main-height">
+      <div className="h-full flex-col">
+        <div className="flex-1 space-y-4 p-8 pt-6">
+          <div className="flex items-center justify-between">
+            <h1>Seu todos</h1>
+            <Button>
+              <Plus className="mr-2 h-4 w-4" /> Adicionar novo
+            </Button>
+          </div>
+          <TodosTable />
         </div>
-        <Card className="w-full">
-          <CardHeader>
-            <CardTitle>Todo List</CardTitle>
-            <CardDescription>Lista de todas as tarefas</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ul>
-              <ScrollArea className="h-96 pr-3">
-                <li className="mb-2 flex h-9 items-center justify-between rounded-md border border-input px-3 py-1">
-                  <span className="text-sm font-medium text-muted-foreground">
-                    Tarefa 1
-                  </span>
-                  <Checkbox />
-                </li>
-              </ScrollArea>
-            </ul>
-          </CardContent>
-        </Card>
-      </section>
+      </div>
     </Shell>
   )
 }
