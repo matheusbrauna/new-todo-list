@@ -16,8 +16,8 @@ export function ModeToggle() {
       onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
       className="group"
     >
-      <SunIcon className="text-muted-foreground group-hover:text-foreground h-[1.5rem] w-[1.3rem] dark:hidden" />
-      <MoonIcon className="text-muted-foreground group-hover:text-foreground hidden h-4 w-4 dark:block" />
+      <SunIcon className="h-[1.5rem] w-[1.3rem] text-muted-foreground group-hover:text-foreground dark:hidden" />
+      <MoonIcon className="hidden h-4 w-4 text-muted-foreground group-hover:text-foreground dark:block" />
       <span className="sr-only">Toggle theme</span>
     </Button>
   )

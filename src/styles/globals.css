@@ -83,7 +83,7 @@ body,
 
 @layer components {
   .main-height {
-    height: calc(100vh - 4rem);
+    height: calc(100vh - 11.375rem);
   }
 }
 

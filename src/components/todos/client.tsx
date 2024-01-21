@@ -1,140 +1,29 @@
-import { DataTable } from '@/components/ui/data-table'
+'use client'
 
-import { TodosColumn, columns } from './columns'
+import { Plus } from 'lucide-react'
+
+import { Button } from '@/components/ui/button'
+import { DataTable } from '@/components/ui/data-table'
+import { Heading } from '@/components/ui/heading'
+import { useTodoModal } from '@/hooks/use-todo-modal'
+
+import { columns } from './columns'
 
 export function TodosTable() {
-  const data: TodosColumn[] = [
-    {
-      id: '1',
-      description: 'Tarefa 1',
-      createdAt: new Date().toDateString(),
-    },
-    {
-      id: '2',
-      description: 'Tarefa 2',
-      createdAt: new Date().toDateString(),
-    },
-    {
-      id: '3',
-      description: 'Tarefa 3',
-      createdAt: new Date().toDateString(),
-    },
-    {
-      id: '4',
-      description: 'Tarefa 4',
-      createdAt: new Date().toDateString(),
-    },
-    {
-      id: '4',
-      description: 'Tarefa 4',
-      createdAt: new Date().toDateString(),
-    },
-    {
-      id: '4',
-      description: 'Tarefa 4',
-      createdAt: new Date().toDateString(),
-    },
-    {
-      id: '4',
-      description: 'Tarefa 4',
-      createdAt: new Date().toDateString(),
-    },
-    {
-      id: '4',
-      description: 'Tarefa 4',
-      createdAt: new Date().toDateString(),
-    },
-    {
-      id: '4',
-      description: 'Tarefa 4',
-      createdAt: new Date().toDateString(),
-    },
-    {
-      id: '4',
-      description: 'Tarefa 4',
-      createdAt: new Date().toDateString(),
-    },
-    {
-      id: '4',
-      description: 'Tarefa 4',
-      createdAt: new Date().toDateString(),
-    },
-    {
-      id: '4',
-      description: 'Tarefa 4',
-      createdAt: new Date().toDateString(),
-    },
-    {
-      id: '4',
-      description: 'Tarefa 4',
-      createdAt: new Date().toDateString(),
-    },
-    {
-      id: '4',
-      description: 'Tarefa 4',
-      createdAt: new Date().toDateString(),
-    },
-    {
-      id: '4',
-      description: 'Tarefa 4',
-      createdAt: new Date().toDateString(),
-    },
-    {
-      id: '4',
-      description: 'Tarefa 4',
-      createdAt: new Date().toDateString(),
-    },
-    {
-      id: '4',
-      description: 'Tarefa 4',
-      createdAt: new Date().toDateString(),
-    },
-    {
-      id: '4',
-      description: 'Tarefa 4',
-      createdAt: new Date().toDateString(),
-    },
-    {
-      id: '4',
-      description: 'Tarefa 4',
-      createdAt: new Date().toDateString(),
-    },
-    {
-      id: '4',
-      description: 'Tarefa 4',
-      createdAt: new Date().toDateString(),
-    },
-    {
-      id: '4',
-      description: 'Tarefa 4',
-      createdAt: new Date().toDateString(),
-    },
-    {
-      id: '4',
-      description: 'Tarefa 4',
-      createdAt: new Date().toDateString(),
-    },
-    {
-      id: '4',
-      description: 'Tarefa 4',
-      createdAt: new Date().toDateString(),
-    },
-    {
-      id: '4',
-      description: 'Tarefa 4',
-      createdAt: new Date().toDateString(),
-    },
-    {
-      id: '4',
-      description: 'Tarefa 4',
-      createdAt: new Date().toDateString(),
-    },
-    {
-      id: '4',
-      description: 'Tarefa 4',
-      createdAt: new Date().toDateString(),
-    },
-  ]
+  const onOpen = useTodoModal((state) => state.onOpen)
 
-  return <DataTable searchKey="description" columns={columns} data={data} />
+  return (
+    <>
+      <div className="flex items-center justify-between">
+        <Heading
+          title={`Tarefas (${0})`}
+          description="Gerencie sua lista de tarefas"
+        />
+        <Button onClick={onOpen}>
+          <Plus className="mr-2 h-4 w-4" /> Adicionar tarefa
+        </Button>
+      </div>
+      <DataTable columns={columns} data={[]} />
+    </>
+  )
 }
