@@ -1,9 +1,12 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useTransition } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import * as z from 'zod'
 
+import { createTodo } from '@/actions/create-todo'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -16,26 +19,45 @@ import {
 import { Input } from '@/components/ui/input'
 import { Modal } from '@/components/ui/modal'
 import { useTodoModal } from '@/hooks/use-todo-modal'
+import { catchError } from '@/lib/utils'
 
 const formSchema = z.object({
-  name: z.string().min(1),
+  description: z.string().min(1),
 })
 
-export const TodoModal = () => {
+interface TodoModalProps {
+  userId: string
+}
+
+export const TodoModal = ({ userId }: TodoModalProps) => {
   const { isOpen, onClose } = useTodoModal((state) => ({
     isOpen: state.isOpen,
     onClose: state.onClose,
   }))
 
+  const [isPending, startTransition] = useTransition()
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: '',
+      description: '',
     },
   })
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values)
+    startTransition(async () => {
+      try {
+        await createTodo({
+          description: values.description,
+          userId,
+        })
+
+        form.reset()
+        toast.success('Store added successfully.')
+      } catch (err) {
+        catchError(err)
+      }
+    })
   }
 
   return (
@@ -51,22 +73,32 @@ export const TodoModal = () => {
             <form onSubmit={form.handleSubmit(onSubmit)}>
               <FormField
                 control={form.control}
-                name="name"
+                name="description"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel>Descrição</FormLabel>
                     <FormControl>
-                      <Input placeholder="E-Commerce" {...field} />
+                      <Input
+                        placeholder="Qual sua próxima tarefa?"
+                        disabled={isPending}
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
               <div className="flex w-full items-center justify-end space-x-2 pt-6">
-                <Button variant="outline" onClick={onClose}>
+                <Button
+                  variant="outline"
+                  onClick={onClose}
+                  disabled={isPending}
+                >
                   Cancelar
                 </Button>
-                <Button type="submit">Continuar</Button>
+                <Button type="submit" disabled={isPending}>
+                  Continuar
+                </Button>
               </div>
             </form>
           </Form>

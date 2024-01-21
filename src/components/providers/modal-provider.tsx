@@ -3,12 +3,16 @@
 import { TodoModal } from '@/components/modals/todo-modal'
 import { useMounted } from '@/hooks/use-mounted'
 
-export const ModalProvider = () => {
+interface ModalProviderProps {
+  userId: string
+}
+
+export const ModalProvider = ({ userId }: ModalProviderProps) => {
   const isMounted = useMounted()
 
   if (!isMounted) {
     return null
   }
 
-  return <TodoModal />
+  return <TodoModal userId={userId} />
 }
